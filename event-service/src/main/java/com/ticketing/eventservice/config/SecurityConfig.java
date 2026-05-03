@@ -27,8 +27,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Anyone can view events
                 .requestMatchers(HttpMethod.GET, "/api/events/**").permitAll()
-                // Only ORGANIZER or ADMIN can create events
-                .requestMatchers(HttpMethod.POST, "/api/events").hasAnyRole("ORGANIZER", "ADMIN")
+                // Any authenticated user can create events for now
+                .requestMatchers(HttpMethod.POST, "/api/events").authenticated()
                 // Everything else needs authentication
                 .anyRequest().authenticated()
             )

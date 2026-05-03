@@ -1,0 +1,9 @@
+/home/kipchirchir/ticketing-platform/event-service/src/main/java/com/ticketing/eventservice/security/JwtFilter.java
+/home/kipchirchir/ticketing-platform/event-service/src/main/java/com/ticketing/eventservice/service/EventService.java
+/home/kipchirchir/ticketing-platform/event-service/src/main/java/com/ticketing/eventservice/model/Event.java
+/home/kipchirchir/ticketing-platform/event-service/src/main/java/com/ticketing/eventservice/EventServiceApplication.java
+/home/kipchirchir/ticketing-platform/event-service/src/main/java/com/ticketing/eventservice/controller/EventController.java
+/home/kipchirchir/ticketing-platform/event-service/src/main/java/com/ticketing/eventservice/dto/EventRequest.java
+/home/kipchirchir/ticketing-platform/event-service/src/main/java/com/ticketing/eventservice/dto/EventResponse.java
+/home/kipchirchir/ticketing-platform/event-service/src/main/java/com/ticketing/eventservice/config/SecurityConfig.java
+/home/kipchirchir/ticketing-platform/event-service/src/main/java/com/ticketing/eventservice/repository/EventRepository.java
