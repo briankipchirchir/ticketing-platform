@@ -1,5 +1,6 @@
 com/ticketing/authservice/dto/LoginRequest.class
 com/ticketing/authservice/controller/AuthController.class
+com/ticketing/authservice/config/GlobalExceptionHandler.class
 com/ticketing/authservice/dto/AuthResponse.class
 com/ticketing/authservice/security/JwtUtil.class
 com/ticketing/authservice/model/User.class

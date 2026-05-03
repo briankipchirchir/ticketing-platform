@@ -1,4 +1,5 @@
 com/ticketing/eventservice/config/SecurityConfig.class
+com/ticketing/eventservice/config/GlobalExceptionHandler.class
 com/ticketing/eventservice/repository/EventRepository.class
 com/ticketing/eventservice/security/JwtFilter.class
 com/ticketing/eventservice/model/Event.class

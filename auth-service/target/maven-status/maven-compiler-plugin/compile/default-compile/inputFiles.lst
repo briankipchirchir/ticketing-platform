@@ -7,4 +7,5 @@
 /home/kipchirchir/ticketing-platform/auth-service/src/main/java/com/ticketing/authservice/dto/LoginRequest.java
 /home/kipchirchir/ticketing-platform/auth-service/src/main/java/com/ticketing/authservice/dto/RegisterRequest.java
 /home/kipchirchir/ticketing-platform/auth-service/src/main/java/com/ticketing/authservice/security/JwtUtil.java
+/home/kipchirchir/ticketing-platform/auth-service/src/main/java/com/ticketing/authservice/config/GlobalExceptionHandler.java
 /home/kipchirchir/ticketing-platform/auth-service/src/main/java/com/ticketing/authservice/model/User.java

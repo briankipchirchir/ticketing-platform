@@ -1,10 +1,9 @@
-package com.ticketing.eventservice.config;
+package com.ticketing.ticketservice.config;
 
-import com.ticketing.eventservice.security.JwtFilter;
+import com.ticketing.ticketservice.security.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -25,10 +24,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.GET, "/api/events/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/events").authenticated()
-                // Allow internal service calls to reserve endpoint
-                .requestMatchers(HttpMethod.POST, "/api/events/*/reserve").permitAll()
+                // All ticket endpoints require authentication
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
