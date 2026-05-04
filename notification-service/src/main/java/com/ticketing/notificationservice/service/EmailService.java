@@ -3,27 +3,54 @@ package com.ticketing.notificationservice.service;
 import com.ticketing.notificationservice.event.TicketBookedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import java.util.Map;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class EmailService {
 
-    private final JavaMailSender mailSender;
+    @Value("${resend.api-key}")
+    private String apiKey;
+
+    @Value("${resend.from-email}")
+    private String fromEmail;
+
+    private final RestTemplate restTemplate;
 
     public void sendTicketConfirmation(TicketBookedEvent event) {
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(event.getUserEmail());
-            message.setSubject("🎟️ Your Tickets are Confirmed!");
-            message.setText(buildEmailBody(event));
-            mailSender.send(message);
-            log.info("Confirmation email sent to {}", event.getUserEmail());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setBearerAuth(apiKey);
+
+            Map<String, Object> body = Map.of(
+                "from", fromEmail,
+                "to", new String[]{event.getUserEmail()},
+                "subject", "🎟️ Your Tickets are Confirmed!",
+                "text", buildEmailBody(event)
+            );
+
+            HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
+
+            ResponseEntity<String> response = restTemplate.postForEntity(
+                "https://api.resend.com/emails",
+                request,
+                String.class
+            );
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                log.info("Confirmation email sent to {}", event.getUserEmail());
+            } else {
+                log.error("Failed to send email: {}", response.getBody());
+            }
+
         } catch (Exception e) {
-            log.error("Failed to send email to {}: {}", event.getUserEmail(), e.getMessage());
+            log.error("Error sending email to {}: {}", event.getUserEmail(), e.getMessage());
         }
     }
 
